@@ -1,0 +1,26 @@
+// Variables
+$brown: #4d4137;
+$very-light-brown: #f2f2f0;
+
+// Bootstrap
+$primary: $brown;
+@import "bootstrap/scss/bootstrap";
+
+// Fonts
+@font-face {
+  font-family: 'TaoBin';
+  src: url('/fonts/taobin.woff2') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+// Custom CSS
+body {
+  font-family: 'TaoBin', sans-serif;
+  background-color: $very-light-brown;
+  padding-top: 1rem;
+}
+
+.container {
+  max-width: 600px;
+}
