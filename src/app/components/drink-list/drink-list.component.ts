@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Drink } from '../../models/drink.model';
 import { DrinkService } from '../../services/drink.service';
 
@@ -8,11 +8,20 @@ import { DrinkService } from '../../services/drink.service';
   templateUrl: './drink-list.component.html',
   styleUrl: './drink-list.component.scss'
 })
-export class DrinkListComponent {
+export class DrinkListComponent implements OnInit {
 
-  private drinkService = inject(DrinkService)
 
-  drinks: Drink[] = this.drinkService.getDrinks();
+  private drinkService = inject(DrinkService);
+  drinks: Drink[] = [];
+
+  ngOnInit(): void {
+    this.drinkService.getDrinks()
+    .subscribe(
+      (drinks: Drink[]) => {
+        this.drinks = drinks;
+      }
+    );
+  }
 
   showLog(drink: Drink) {
     console.log(drink);

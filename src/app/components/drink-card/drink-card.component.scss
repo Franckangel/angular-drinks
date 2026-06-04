@@ -1,0 +1,7 @@
+.card {
+  cursor: pointer;
+
+  &:hover {
+    outline: 2px solid #aaa;
+  }
+}
