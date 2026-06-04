@@ -1,7 +1,7 @@
 <button class="btn btn-primary mb-3" routerLink="..">
   Back
 </button>
-<div class="card">
+<div class="card" *ngIf="drink">
   <div class="card-body text-center">
     <h1>{{ drink.name }}</h1>
     <img class="img-fluid rounded" [src]="drink.image">

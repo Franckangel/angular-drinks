@@ -15,4 +15,8 @@ export class DrinkService {
   getDrinks() : Observable<Drink[]> {
     return this.httpClient.get<Drink[]>(this.baseUrl);
   }
+
+  getDrink(drinkId: string) : Observable<Drink> {
+    return this.httpClient.get<Drink>(this.baseUrl + '/' + drinkId);
+  }
 }
