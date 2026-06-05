@@ -8,9 +8,10 @@ import { DrinkCardComponent } from './components/drink-card/drink-card.component
 import { registerLocaleData } from '@angular/common';
 import localeFr from '@angular/common/locales/fr';
 import { DrinkCategoryLabelPipe } from './pipes/drink-category-label.pipe';
-import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { DrinkDetailsComponent } from './components/drink-details/drink-details.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
+import { notFoundInterceptor } from './interceptors/not-found.interceptor';
 
 registerLocaleData(localeFr)
 
@@ -32,7 +33,7 @@ registerLocaleData(localeFr)
       provide: LOCALE_ID,
       useValue: 'fr-FR'
     },
-    provideHttpClient()
+    provideHttpClient(withInterceptors([notFoundInterceptor]))
 
   ],
   bootstrap: [AppComponent]

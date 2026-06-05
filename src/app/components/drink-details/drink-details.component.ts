@@ -21,19 +21,19 @@ export class DrinkDetailsComponent implements OnInit {
     this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
       const drinkId: string = paramMap.get('drinkId')!;
       this.drinkService.getDrink(drinkId).subscribe({
-       next : (drink) => {
-        this.drink = drink;
-       },
-       error : (error) => {
-        if(error instanceof HttpErrorResponse) {
-          if (error.status == 404) {
-              this.router.navigate(['/not-found'], {skipLocationChange: true})
+        next: (drink) => {
+          this.drink = drink;
+        },
+        error: (error) => {
+          if (error instanceof HttpErrorResponse) {
+            if (error.status == 404) {
+              this.router.navigate(['/not-found'], { skipLocationChange: true })
+            }
           }
+        },
+        complete: () => {
+          console.log('complete')
         }
-       },
-       complete : () => {
-        console.log('complete')
-       }
 
       })
 
