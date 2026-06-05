@@ -2,20 +2,53 @@
 <div class="card">
   <div class="card-body">
     <!-- Form check
+     <pre>{{formGroup.value | json}}</pre>
+
+    <pre>{{formGroup.controls['name'].invalid | json}}</pre>
+    <pre>{{formGroup.controls['name'].errors | json}}</pre>
      -->
-    <pre>{{formGroup.value | json}}</pre>
+
     <form [formGroup]="formGroup" (ngSubmit)="createDrink()">
       <div class="mb-3">
         <label class="form-label" for="name">Name</label>
-        <input formControlName="name" type="text" class="form-control" id="name">
+        <input [class.is-invalid]="isInvalidAndTouchedOrDirty(formGroup.controls['name'])" formControlName="name"
+          type="text" class="form-control" id="name">
+        <small class="text-danger" *ngIf="isInvalidAndTouchedOrDirty(formGroup.controls['name'])">
+          <ng-container *ngIf="formGroup.controls['name'].hasError('required')">
+            The name is required
+          </ng-container>
+          <ng-container *ngIf="formGroup.controls['name'].hasError('minlength')">
+            The name must have a minimum of {{ formGroup.controls['name']['errors']!['minlength'].requiredLength }}
+            characters
+          </ng-container>
+        </small>
       </div>
       <div class="mb-3">
         <label class="form-label" for="price">Price</label>
-        <input formControlName="price" type="number" class="form-control" id="price">
+        <input [class.is-invalid]="isInvalidAndTouchedOrDirty(formGroup.controls['price'])" formControlName="price"
+          type="number" class="form-control" id="price">
+        <small class="text-danger" *ngIf="isInvalidAndTouchedOrDirty(formGroup.controls.price)">
+          <ng-container *ngIf="formGroup.controls['price'].hasError('required')">
+            The price is required
+          </ng-container>
+          <ng-container *ngIf="formGroup.controls['price'].hasError('min')">
+            The price must be {{ formGroup.controls.price.errors!['min'].min }}
+          </ng-container>
+        </small>
       </div>
       <div class="mb-3">
         <label class="form-label" for="description">Description</label>
-        <textarea formControlName="description" class="form-control" id="description"></textarea>
+        <textarea [class.is-invalid]="isInvalidAndTouchedOrDirty(formGroup.controls['description'])"
+          formControlName="description" class="form-control" id="description"></textarea>
+        <small class="text-danger" *ngIf="isInvalidAndTouchedOrDirty(formGroup.controls['description'])">
+          <ng-container *ngIf="formGroup.controls['description'].hasError('required')">
+            The description is required
+          </ng-container>
+          <ng-container *ngIf="formGroup.controls['description'].hasError('minlength')">
+            The description must have a minimum of {{ formGroup.controls.description.errors!['minlength'].requiredLength
+            }} characters
+          </ng-container>
+        </small>
       </div>
       <div class="mb-3">
         <label class="form-label d-block" for="category">Category</label>
@@ -34,16 +67,21 @@
       </div>
       <div class="mb-3">
         <label class="form-label" for="image">Image</label>
-        <select formControlName="image" class="form-control" id="image">
+        <select [class.is-invalid]="isInvalidAndTouchedOrDirty(formGroup.controls['image'])" formControlName="image"
+          class="form-control" id="image">
           <option *ngFor="let image of drinksImageUrls" [value]="image">
             {{ image }}
           </option>
         </select>
-        <img *ngIf="formGroup.value.image" [src]="formGroup.value.image" class="d-block mt-3 rounded" style="max-width: 150px;">
+        <small class="text-danger"
+          *ngIf="isInvalidAndTouchedOrDirty(formGroup.controls.image) && formGroup.controls.image.hasError('required')">
+          The image is required
+        </small>
+        <img *ngIf="formGroup.value.image" [src]="formGroup.value.image" class="d-block mt-3 rounded"
+          style="max-width: 150px;">
       </div>
       <div class="text-end">
-        <button type="button" class="btn btn-outline-secondary me-2"
-         routerLink="/admin/drinks">Cancel</button>
+        <button type="button" class="btn btn-outline-secondary me-2" routerLink="/admin/drinks">Cancel</button>
         <button type="submit" class="btn btn-primary">Save</button>
       </div>
     </form>
