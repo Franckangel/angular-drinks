@@ -1,7 +1,8 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Drink } from '../../models/drink.model';
 import { DrinkService } from '../../services/drink.service';
-import { ActivatedRoute, ParamMap } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-drink-details',
@@ -12,15 +13,30 @@ import { ActivatedRoute, ParamMap } from '@angular/router';
 export class DrinkDetailsComponent implements OnInit {
   private drinkService = inject(DrinkService);
   private activatedRoute = inject(ActivatedRoute);
+  private router = inject(Router);
 
   drink?: Drink;
 
   ngOnInit(): void {
     this.activatedRoute.paramMap.subscribe((paramMap: ParamMap) => {
       const drinkId: string = paramMap.get('drinkId')!;
-      this.drinkService.getDrink(drinkId).subscribe((drink) => {
+      this.drinkService.getDrink(drinkId).subscribe({
+       next : (drink) => {
         this.drink = drink;
+       },
+       error : (error) => {
+        if(error instanceof HttpErrorResponse) {
+          if (error.status == 404) {
+              this.router.navigate(['/not-found'], {skipLocationChange: true})
+          }
+        }
+       },
+       complete : () => {
+        console.log('complete')
+       }
+
       })
+
     })
   }
 
