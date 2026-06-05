@@ -3,13 +3,12 @@ import { Drink } from '../../models/drink.model';
 import { DrinkService } from '../../services/drink.service';
 
 @Component({
-  selector: 'app-drink-list',
+  selector: 'app-admin-drink-list',
   standalone: false,
-  templateUrl: './drink-list.component.html',
-  styleUrl: './drink-list.component.scss'
+  templateUrl: './admin-drink-list.component.html',
+  styleUrl: './admin-drink-list.component.scss'
 })
-export class DrinkListComponent implements OnInit {
-
+export class AdminDrinkListComponent implements OnInit {
 
   private drinkService = inject(DrinkService);
   drinks: Drink[] = [];
@@ -22,10 +21,5 @@ export class DrinkListComponent implements OnInit {
         }
       );
   }
-
-  showLog(drink: Drink) {
-    console.log(drink);
-  }
-
 
 }

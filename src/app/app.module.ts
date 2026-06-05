@@ -12,6 +12,8 @@ import { provideHttpClient, withInterceptors } from '@angular/common/http';
 import { DrinkDetailsComponent } from './components/drink-details/drink-details.component';
 import { NotFoundComponent } from './components/not-found/not-found.component';
 import { notFoundInterceptor } from './interceptors/not-found.interceptor';
+import { AdminDrinkListComponent } from './components/admin-drink-list/admin-drink-list.component';
+import { AdminDrinkFormComponent } from './components/admin-drink-form/admin-drink-form.component';
 
 registerLocaleData(localeFr)
 
@@ -22,7 +24,9 @@ registerLocaleData(localeFr)
     DrinkCardComponent,
     DrinkCategoryLabelPipe,
     DrinkDetailsComponent,
-    NotFoundComponent
+    NotFoundComponent,
+    AdminDrinkListComponent,
+    AdminDrinkFormComponent
   ],
   imports: [
     BrowserModule,
