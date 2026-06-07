@@ -9,12 +9,12 @@
       "image": "drinks/taiwanese-tea-cafe-latte.png"
     },
     {
-      "id": "34k1",
       "name": "Matcha Latte",
-      "price": 1.99,
+      "price": 5,
       "description": "Lorem ipsum",
       "category": "low-sugar",
-      "image": "drinks/matcha-latte.png"
+      "image": "drinks/matcha-latte.png",
+      "id": "34k1"
     },
     {
       "id": "03b5",
@@ -47,6 +47,15 @@
       "description": "Lorem Ipsum",
       "category": "no-sugar",
       "image": "drinks/kokuto-cafe-latte.png"
+    },
+    {
+      "name": "Matcha Latte",
+      "price": 5,
+      "description": "Lorem ipsum",
+      "category": "low-sugar",
+      "image": "drinks/matcha-latte.png",
+      "id": "2bYbKw984vc"
     }
-  ]
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
 }

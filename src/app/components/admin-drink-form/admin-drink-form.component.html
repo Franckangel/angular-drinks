@@ -1,4 +1,4 @@
-<h1>Create Drink</h1>
+<h1> {{ drink ? 'Update Drink' : 'Create Drink' }}</h1>
 <div class="card">
   <div class="card-body">
     <!-- Form check
@@ -8,7 +8,7 @@
     <pre>{{formGroup.controls['name'].errors | json}}</pre>
      -->
 
-    <form [formGroup]="formGroup" (ngSubmit)="createDrink()">
+    <form [formGroup]="formGroup" (ngSubmit)="saveDrink()">
       <div class="mb-3">
         <label class="form-label" for="name">Name</label>
         <input [class.is-invalid]="isInvalidAndTouchedOrDirty(formGroup.controls['name'])" formControlName="name"
@@ -81,6 +81,7 @@
           style="max-width: 150px;">
       </div>
       <div class="text-end">
+        <button type="button" *ngIf="drink" (click)="deleteDrink()" class="btn btn-outline-danger float-start">Delete</button>
         <button type="button" class="btn btn-outline-secondary me-2" routerLink="/admin/drinks">Cancel</button>
         <button type="submit" class="btn btn-primary">Save</button>
       </div>

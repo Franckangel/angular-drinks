@@ -19,4 +19,16 @@ export class DrinkService {
   getDrink(drinkId: string) : Observable<Drink> {
     return this.httpClient.get<Drink>(this.baseUrl + '/' + drinkId);
   }
+
+  createDrink(drink: Drink) {
+    return this.httpClient.post<Drink>(this.baseUrl, drink);
+  }
+
+  updateDrink(drinkId: string, drink: Drink) {
+    return this.httpClient.put<Drink>(this.baseUrl + '/' + drinkId, drink);
+  }
+
+  deleteDrink(drinkId: string) {
+    return this.httpClient.delete(this.baseUrl + '/' + drinkId);
+  }
 }
