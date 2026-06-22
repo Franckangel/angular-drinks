@@ -19,30 +19,27 @@ import { ReactiveFormsModule } from '@angular/forms';
 registerLocaleData(localeFr)
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    DrinkListComponent,
-    DrinkCardComponent,
-    DrinkCategoryLabelPipe,
-    DrinkDetailsComponent,
-    NotFoundComponent,
-    AdminDrinkListComponent,
-    AdminDrinkFormComponent
-  ],
-  imports: [
-    BrowserModule,
-    ReactiveFormsModule,
-    AppRoutingModule,
-  ],
-  providers: [
-    {
-      provide: LOCALE_ID,
-      useValue: 'fr-FR'
-    },
-    provideHttpClient(withInterceptors([notFoundInterceptor]))
-
-  ],
-  bootstrap: [AppComponent]
+    declarations: [AppComponent],
+    imports: [
+        BrowserModule,
+        ReactiveFormsModule,
+        AppRoutingModule,
+        DrinkCategoryLabelPipe,
+        DrinkListComponent,
+        DrinkCardComponent,
+        DrinkDetailsComponent,
+        NotFoundComponent,
+        AdminDrinkListComponent,
+        AdminDrinkFormComponent
+    ],
+    providers: [
+        {
+            provide: LOCALE_ID,
+            useValue: 'fr-FR'
+        },
+        provideHttpClient(withInterceptors([notFoundInterceptor]))
+    ],
+    bootstrap: [AppComponent]
 })
 export class AppModule {
 }

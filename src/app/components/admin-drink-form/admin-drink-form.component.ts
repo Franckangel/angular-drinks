@@ -1,14 +1,16 @@
 import { Component, inject, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { Drink, DrinkCategory } from '../../models/drink.model';
 import { DrinkService } from '../../services/drink.service';
-import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { Router, ActivatedRoute, ParamMap, RouterLink } from '@angular/router';
+import { NgIf, NgFor } from '@angular/common';
 
 @Component({
-  selector: 'app-admin-drink-form',
-  standalone: false,
-  templateUrl: './admin-drink-form.component.html',
-  styleUrl: './admin-drink-form.component.scss'
+    selector: 'app-admin-drink-form',
+    templateUrl: './admin-drink-form.component.html',
+    styleUrl: './admin-drink-form.component.scss',
+    standalone: true,
+    imports: [ReactiveFormsModule, NgIf, NgFor, RouterLink]
 })
 export class AdminDrinkFormComponent implements OnInit {
 

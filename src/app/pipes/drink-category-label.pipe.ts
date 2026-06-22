@@ -3,7 +3,7 @@ import { DrinkCategory } from '../models/drink.model';
 
 @Pipe({
   name: 'drinkCategoryLabel',
-  standalone: false
+  standalone: true
 })
 export class DrinkCategoryLabelPipe implements PipeTransform {
 
