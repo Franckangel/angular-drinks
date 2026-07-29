@@ -10,7 +10,7 @@ import { NgIf, NgFor } from '@angular/common';
     templateUrl: './admin-drink-form.component.html',
     styleUrl: './admin-drink-form.component.scss',
     standalone: true,
-    imports: [ReactiveFormsModule, NgIf, NgFor, RouterLink]
+    imports: [ReactiveFormsModule, RouterLink]
 })
 export class AdminDrinkFormComponent implements OnInit {
 

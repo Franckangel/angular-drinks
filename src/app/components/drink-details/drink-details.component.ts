@@ -11,7 +11,7 @@ import { DrinkCategoryLabelPipe } from '../../pipes/drink-category-label.pipe';
     templateUrl: './drink-details.component.html',
     styleUrl: './drink-details.component.scss',
     standalone: true,
-    imports: [RouterLink, NgIf, CurrencyPipe, DrinkCategoryLabelPipe]
+    imports: [RouterLink, CurrencyPipe, DrinkCategoryLabelPipe]
 })
 export class DrinkDetailsComponent implements OnInit {
   private drinkService = inject(DrinkService);

@@ -6,7 +6,7 @@ import { NotFoundComponent } from './components/not-found/not-found.component';
 import { AdminDrinkListComponent } from './components/admin-drink-list/admin-drink-list.component';
 import { AdminDrinkFormComponent } from './components/admin-drink-form/admin-drink-form.component';
 
-const routes: Routes = [
+export const routes: Routes = [
   {path: '', redirectTo: 'drinks', pathMatch: 'full'},
   {path: 'drinks', component: DrinkListComponent},
   {path: 'drinks/:drinkId', component: DrinkDetailsComponent},
@@ -17,10 +17,3 @@ const routes: Routes = [
   {path: 'not-found', component: NotFoundComponent},
   {path: '**', component: NotFoundComponent}
 ];
-
-@NgModule({
-  imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
-})
-export class AppRoutingModule {
-}

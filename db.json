@@ -10,7 +10,7 @@
     },
     {
       "name": "Matcha Latte",
-      "price": 5,
+      "price": 10,
       "description": "Lorem ipsum",
       "category": "low-sugar",
       "image": "drinks/matcha-latte.png",

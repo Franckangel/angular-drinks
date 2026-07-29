@@ -1,57 +1,48 @@
-<h1> {{ drink ? 'Update Drink' : 'Create Drink' }}</h1>
-<div class="card">
+<h1>{{ drink ? 'Update Drink' : 'Create Drink' }}</h1>
+<div class="card mb-3">
   <div class="card-body">
-    <!-- Form check
-     <pre>{{formGroup.value | json}}</pre>
-
-    <pre>{{formGroup.controls['name'].invalid | json}}</pre>
-    <pre>{{formGroup.controls['name'].errors | json}}</pre>
-     -->
-
     <form [formGroup]="formGroup" (ngSubmit)="saveDrink()">
       <div class="mb-3">
         <label class="form-label" for="name">Name</label>
-        <input [class.is-invalid]="isInvalidAndTouchedOrDirty(formGroup.controls['name'])" formControlName="name"
-          type="text" class="form-control" id="name">
-        <small class="text-danger" *ngIf="isInvalidAndTouchedOrDirty(formGroup.controls['name'])">
-          <ng-container *ngIf="formGroup.controls['name'].hasError('required')">
-            The name is required
-          </ng-container>
-          <ng-container *ngIf="formGroup.controls['name'].hasError('minlength')">
-            The name must have a minimum of {{ formGroup.controls['name']['errors']!['minlength'].requiredLength }}
-            characters
-          </ng-container>
-        </small>
+        <input [class.is-invalid]="isInvalidAndTouchedOrDirty(formGroup.controls.name)" formControlName="name" type="text" class="form-control" id="name">
+        @if (isInvalidAndTouchedOrDirty(formGroup.controls.name)) {
+          <small class="text-danger">
+            @if (formGroup.controls.name.hasError('required')) {
+              The name is required
+            } @else if (formGroup.controls.name.hasError('minlength')) {
+              The name must have a minimum of {{ formGroup.controls.name.errors!['minlength'].requiredLength }} characters
+            }
+          </small>
+        }
       </div>
       <div class="mb-3">
         <label class="form-label" for="price">Price</label>
-        <input [class.is-invalid]="isInvalidAndTouchedOrDirty(formGroup.controls['price'])" formControlName="price"
-          type="number" class="form-control" id="price">
-        <small class="text-danger" *ngIf="isInvalidAndTouchedOrDirty(formGroup.controls.price)">
-          <ng-container *ngIf="formGroup.controls['price'].hasError('required')">
-            The price is required
-          </ng-container>
-          <ng-container *ngIf="formGroup.controls['price'].hasError('min')">
-            The price must be {{ formGroup.controls.price.errors!['min'].min }}
-          </ng-container>
-        </small>
+        <input [class.is-invalid]="isInvalidAndTouchedOrDirty(formGroup.controls.price)" formControlName="price" type="number" class="form-control" id="price">
+        @if (isInvalidAndTouchedOrDirty(formGroup.controls.price)) {
+          <small class="text-danger">
+            @if (formGroup.controls.price.hasError('required')) {
+              The price is required
+            } @else if (formGroup.controls.price.hasError('min')) {
+              The minimum price must be {{ formGroup.controls.price.errors!['min'].min }}
+            }
+          </small>
+        }
       </div>
       <div class="mb-3">
         <label class="form-label" for="description">Description</label>
-        <textarea [class.is-invalid]="isInvalidAndTouchedOrDirty(formGroup.controls['description'])"
-          formControlName="description" class="form-control" id="description"></textarea>
-        <small class="text-danger" *ngIf="isInvalidAndTouchedOrDirty(formGroup.controls['description'])">
-          <ng-container *ngIf="formGroup.controls['description'].hasError('required')">
-            The description is required
-          </ng-container>
-          <ng-container *ngIf="formGroup.controls['description'].hasError('minlength')">
-            The description must have a minimum of {{ formGroup.controls.description.errors!['minlength'].requiredLength
-            }} characters
-          </ng-container>
-        </small>
+        <textarea [class.is-invalid]="isInvalidAndTouchedOrDirty(formGroup.controls.description)" formControlName="description" class="form-control" id="description"></textarea>
+        @if (isInvalidAndTouchedOrDirty(formGroup.controls.description)) {
+          <small class="text-danger">
+            @if (formGroup.controls.description.hasError('required')) {
+              The description is required
+            } @else if (formGroup.controls.description.hasError('minlength')) {
+              The description must have a minimum of {{ formGroup.controls.description.errors!['minlength'].requiredLength }} characters
+            }
+          </small>
+        }
       </div>
       <div class="mb-3">
-        <label class="form-label d-block" for="category">Category</label>
+        <label class="form-label d-block">Category</label>
         <div class="form-check form-check-inline">
           <input formControlName="category" class="form-check-input" type="radio" id="inlineRadio1" value="sweet">
           <label class="form-check-label" for="inlineRadio1">Sweet</label>
@@ -67,22 +58,26 @@
       </div>
       <div class="mb-3">
         <label class="form-label" for="image">Image</label>
-        <select [class.is-invalid]="isInvalidAndTouchedOrDirty(formGroup.controls['image'])" formControlName="image"
-          class="form-control" id="image">
-          <option *ngFor="let image of drinksImageUrls" [value]="image">
-            {{ image }}
-          </option>
+        <select [class.is-invalid]="isInvalidAndTouchedOrDirty(formGroup.controls.image)" formControlName="image" class="form-control" id="image">
+          @for (image of drinksImageUrls; track $index) {
+            <option [value]="image">{{ image }}</option>
+          }
         </select>
-        <small class="text-danger"
-          *ngIf="isInvalidAndTouchedOrDirty(formGroup.controls.image) && formGroup.controls.image.hasError('required')">
-          The image is required
-        </small>
-        <img *ngIf="formGroup.value.image" [src]="formGroup.value.image" class="d-block mt-3 rounded"
-          style="max-width: 150px;">
+        @if (isInvalidAndTouchedOrDirty(formGroup.controls.image) && formGroup.controls.image.hasError('required')) {
+          <small class="text-danger">The image is required</small>
+        }
+        @if (formGroup.value.image) {
+          <img [src]="formGroup.value.image" class="d-block mt-3 rounded" style="max-width: 150px">
+        }
+
       </div>
       <div class="text-end">
-        <button type="button" *ngIf="drink" (click)="deleteDrink()" class="btn btn-outline-danger float-start">Delete</button>
-        <button type="button" class="btn btn-outline-secondary me-2" routerLink="/admin/drinks">Cancel</button>
+        @if (drink) {
+          <button (click)="deleteDrink()" class="btn btn-outline-danger float-start">Delete</button>
+        }
+        <button type="button" class="btn btn-outline-secondary me-2"
+                routerLink="/admin/drinks">Cancel
+        </button>
         <button type="submit" class="btn btn-primary">Save</button>
       </div>
     </form>

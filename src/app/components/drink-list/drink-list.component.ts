@@ -8,7 +8,7 @@ import { DrinkCardComponent } from '../drink-card/drink-card.component';
     selector: 'app-drink-list',
     templateUrl: './drink-list.component.html',
     styleUrl: './drink-list.component.scss',
-    imports: [NgFor, DrinkCardComponent]
+    imports: [DrinkCardComponent]
 })
 export class DrinkListComponent implements OnInit {
 
